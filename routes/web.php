@@ -19,7 +19,7 @@ use App\Http\Controllers\DepartmanController;
 @include_once('admin_web.php');
 
 Route::get('/', function () {
-    return redirect()->route('modern-layout');
+    return redirect()->route('login');
 })->name('/');
 
 Route::prefix('starter-kit')->group(function () {
@@ -27,11 +27,10 @@ Route::prefix('starter-kit')->group(function () {
 });
 
 
-Route::get('personel',[DepartmanController::class,'get'] )->name('personel');
+Route::get('personel',[DepartmanController::class,'get'] )->name('personel')->middleware('auth');
 Route::post('personel/kaydet',[PersonelController::class,'save'] )->name('perSave');
+Route::get('personel/detay/{id}',[PersonelController::class,'detay'] )->name('perDetay')->middleware('auth');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
 
 Auth::routes();
 

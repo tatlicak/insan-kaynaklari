@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Personel;
 use App\Models\Pozisyon;
 use Illuminate\Http\Request;
+use App\Models\PersonnelFile;
+use App\Models\PersonnelFileType;
 
 class PersonelController extends Controller
 {
@@ -42,6 +44,13 @@ class PersonelController extends Controller
         return redirect(route('personel'));
 
     }
-        
+     
+    public function detay($id){
+
+        $personel=Personel::findOrFail($id);
+        $fileTypes=PersonnelFileType::all();
+        $personelFiles=PersonnelFile::firstWhere('personel_id',$id);
+
+        return view('layouts.personel-detay', compact('personel','fileTypes','personelFiles'));    }
    
 }

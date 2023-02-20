@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="per_anne">Anne Adı</label>
-                                <input class="form-control" id="per_anne" name="per_anne" type="date" required="" placeholder="Anne Adı" autocomplete="off" />
+                                <input class="form-control" id="per_anne" name="per_anne" type="text" required="" placeholder="Anne Adı" autocomplete="off" />
                             </div>
                             <div class="col-sm-6">
                                 <label for="per_baba">Baba Adı</label>

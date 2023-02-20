@@ -91,7 +91,7 @@
               <div class="media">
                 <img class="img-fluid rounded-circle me-3" src="{{asset('assets/images/user/4.jpg')}}" alt="">
                 <div class="media-body">
-                  <span>Ain Chavez</span>
+                  <span>Ain Chavez</span>Ç
                   <p class="f-12 light-font">Lorem Ipsum is simply dummy...</p>
                 </div>
                 <p class="f-12">32 mins ago</p>
@@ -121,7 +121,7 @@
           </ul>
         </li>
         <li class="onhover-dropdown p-0">
-          <button class="btn btn-primary-light" type="button"><i data-feather="log-out"></i>Log out</button>
+          <button class="btn btn-primary-light" type="button"><i data-feather="log-out"></i>Çıkış</button>
         </li>
       </ul>
     </div>

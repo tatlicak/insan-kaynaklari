@@ -12,7 +12,7 @@ class Personel extends Model
     protected $guarded=[];
 
     public function pozisyon() {
-        return $this->belongsTo(Pozisyon::class);
+        return $this->belongsTo(Pozisyon::class,'meslek_kodu');
      }
     
     public function sube() {
@@ -27,4 +27,5 @@ class Personel extends Model
         return Carbon::parse($this->$field)->format('d/m/Y');
 
     }
+
 }

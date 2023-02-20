@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('layouts.modern-layout.master')
 
 @section('title')Contacts
  {{ $title }}
@@ -31,8 +31,8 @@
 	                                    <div class="media">
 	                                        <div class="media-size-email"><img class="me-3 rounded-circle" src="{{asset('assets/images/user/user.png')}}" alt="" /></div>
 	                                        <div class="media-body">
-	                                            <a href="#"> <h6 class="f-w-700">MARK JENCO</h6></a>
-	                                            <p>Markjecno@gmail.com</p>
+	                                            <a href="#"> <h6 class="f-w-700">{{$user->name}}</h6></a>
+	                                            <p>{{$user->email}}</p>
 	                                        </div>
 	                                    </div>
 	                                    <ul class="nav main-menu contact-options" role="tablist">
@@ -46,27 +46,7 @@
 
 	                                        <li>
 	                                            
-	                                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-	                                                <div class="modal-dialog" role="document">
-	                                                    <div class="modal-content">
-	                                                        <div class="modal-header">
-	                                                            <h5 class="modal-title" id="exampleModalLabel1">Şube Ekle</h5>
-	                                                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-	                                                        </div>
-	                                                        <div class="modal-body">
-	                                                            <form class="form-bookmark">
-	                                                                <div class="row g-2">
-	                                                                    <div class="mb-3 col-md-12">
-	                                                                        <input class="form-control" type="text" required="" placeholder="Şube İsmi Giriniz..." autocomplete="off" />
-	                                                                    </div>
-	                                                                </div>
-	                                                                <button class="btn btn-secondary" type="button">Save</button>
-	                                                                <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
-	                                                            </form>
-	                                                        </div>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
+	                                           
 	                                        </li>
 											@foreach ($subeler as $sube)
 												
@@ -139,10 +119,9 @@
 	                                                                        <h5><span class="first_name_0">{{$personel->ad}} </span><span class="last_name_0">{{$personel->soyad}}</span></h5>
 	                                                                        <p class="email_add_0">{{$personel->eposta}}</p>
 	                                                                        <ul>
-	                                                                            <li><a href="javascript:void(0)" onclick="editContact({{$loop->index}})">Düzenle</a></li>
-	                                                                            <li><a href="javascript:void(0)" onclick="deleteContact({{$personel->id}})">Sil</a></li>
-	                                                                            <li><a href="javascript:void(0)" onclick="history({{$loop->index}})">Geçmiş</a></li>
-	                                                                            <li><a href="javascript:void(0)" onclick="printContact({{$loop->index}})" data-bs-toggle="modal" data-bs-target="#printModal">Yazdır</a></li>
+	                                                                            <li><a href="{{route('perDetay',$personel->id)}}">Detay</a></li>
+	                                                                            
+
 	                                                                        </ul>
 	                                                                    </div>
 	                                                                </div>
@@ -194,172 +173,7 @@
 	                                                       
 	                                                       
 	                                                    </div>
-	                                                    <div class="contact-editform">
-	                                                        <form>
-	                                                            <div class="row g-2">
-	                                                                <div class="mt-0 mb-3 col-md-12">
-	                                                                    <label>Name</label>
-	                                                                    <div class="row">
-	                                                                        <div class="col-sm-6">
-	                                                                            <input class="form-control" id="first_name" type="text" required="" placeholder="First Name" value="first_name" />
-	                                                                        </div>
-	                                                                        <div class="col-sm-6">
-	                                                                            <input class="form-control" id="last_name" type="text" required="" placeholder="Last Name" value="last_name" />
-	                                                                        </div>
-	                                                                    </div>
-	                                                                </div>
-	                                                                <div class="mt-0 mb-3 col-md-12">
-	                                                                    <label>Email Address</label>
-	                                                                    <input class="form-control" id="email_add" type="text" required="" autocomplete="off" />
-	                                                                </div>
-	                                                                <div class="mt-0 mb-3 col-md-12">
-	                                                                    <label>Phone</label>
-	                                                                    <div class="row">
-	                                                                        <div class="col-sm-6">
-	                                                                            <input class="form-control" id="mobile_num" type="text" required="" autocomplete="off" />
-	                                                                        </div>
-	                                                                        <div class="col-sm-6">
-	                                                                            <select class="form-control">
-	                                                                                <option>Mobile</option>
-	                                                                                <option>Work</option>
-	                                                                                <option>Others</option>
-	                                                                            </select>
-	                                                                        </div>
-	                                                                    </div>
-	                                                                </div>
-	                                                            </div>
-	                                                            <div class="row g-2 more-data">
-	                                                                <div class="mt-0 mb-3 col-md-12">
-	                                                                    <label>URLS</label>
-	                                                                    <div class="row">
-	                                                                        <div class="col-lg-6 col-sm-6">
-	                                                                            <input class="form-control" id="url_add" type="text" required="" />
-	                                                                        </div>
-	                                                                        <div class="col-lg-4 col-sm-6">
-	                                                                            <select class="js-example-basic-single">
-	                                                                                <option value="pw">Personal web address</option>
-	                                                                                <option value="cw">Company web address</option>
-	                                                                                <option value="fb">Fabebook URL</option>
-	                                                                                <option value="tw">Twitter URL</option>
-	                                                                            </select>
-	                                                                        </div>
-	                                                                    </div>
-	                                                                </div>
-	                                                                <div class="mt-0 mb-3 col-md-12">
-	                                                                    <label>Personal</label>
-	                                                                    <div class="d-block">
-	                                                                        <label class="me-3" for="edo-ani"> <input class="radio_animated" id="edo-ani" type="radio" name="rdo-ani" checked="" /><span>Male</span> </label>
-	                                                                        <label for="edo-ani1"> <input class="radio_animated" id="edo-ani1" type="radio" name="rdo-ani" /><span>Female</span> </label>
-	                                                                    </div>
-	                                                                </div>
-	                                                                <div class="mt-0 mb-3 col-md-12">
-	                                                                    <div class="row">
-	                                                                        <div class="col-lg-2 col-sm-4">
-	                                                                            <select class="form-control" id="birth_day">
-	                                                                                <option class="f-w-600">Day</option>
-	                                                                                <option>01</option>
-	                                                                                <option>02</option>
-	                                                                                <option>03</option>
-	                                                                                <option>04</option>
-	                                                                                <option>05</option>
-	                                                                                <option>06</option>
-	                                                                                <option>07</option>
-	                                                                                <option>08</option>
-	                                                                                <option>09</option>
-	                                                                                <option>10</option>
-	                                                                                <option>11</option>
-	                                                                                <option>12</option>
-	                                                                                <option>13</option>
-	                                                                                <option>14</option>
-	                                                                                <option>15</option>
-	                                                                                <option>16</option>
-	                                                                                <option>17</option>
-	                                                                                <option>18</option>
-	                                                                                <option>19</option>
-	                                                                                <option>20</option>
-	                                                                                <option>21</option>
-	                                                                                <option>22</option>
-	                                                                                <option>23</option>
-	                                                                                <option>24</option>
-	                                                                                <option>25</option>
-	                                                                                <option>26</option>
-	                                                                                <option>27</option>
-	                                                                                <option>28</option>
-	                                                                                <option>29</option>
-	                                                                                <option>30</option>
-	                                                                                <option>31</option>
-	                                                                            </select>
-	                                                                        </div>
-	                                                                        <div class="col-lg-3 col-sm-4">
-	                                                                            <select class="form-control" id="birth_month">
-	                                                                                <option class="f-w-600">Month</option>
-	                                                                                <option>January</option>
-	                                                                                <option>February</option>
-	                                                                                <option>March</option>
-	                                                                                <option>April</option>
-	                                                                                <option>May</option>
-	                                                                                <option>June</option>
-	                                                                                <option>July</option>
-	                                                                                <option>August</option>
-	                                                                                <option>September</option>
-	                                                                                <option>October</option>
-	                                                                                <option>November</option>
-	                                                                                <option>December</option>
-	                                                                            </select>
-	                                                                        </div>
-	                                                                        <div class="col-lg-3 col-sm-4">
-	                                                                            <input class="form-control" id="birth_year" type="text" />
-	                                                                        </div>
-	                                                                    </div>
-	                                                                </div>
-	                                                                <div class="mt-0 mb-3 col-md-12">
-	                                                                    <div class="row">
-	                                                                        <div class="col-sm-6">
-	                                                                            <label>Personality</label>
-	                                                                            <input class="form-control" id="personality" type="text" required="" autocomplete="off" />
-	                                                                        </div>
-	                                                                        <div class="col-sm-6">
-	                                                                            <label>Interest</label>
-	                                                                            <input class="form-control" id="interest" type="text" required="" autocomplete="off" />
-	                                                                        </div>
-	                                                                    </div>
-	                                                                </div>
-	                                                                <div class="mb-3 col-md-12">
-	                                                                    <label>Home Address</label>
-	                                                                    <div class="row">
-	                                                                        <div class="col-12">
-	                                                                            <div class="form-group">
-	                                                                                <input class="form-control" type="text" placeholder="Address" />
-	                                                                            </div>
-	                                                                        </div>
-	                                                                        <div class="col-sm-6">
-	                                                                            <div class="form-group">
-	                                                                                <input class="form-control" id="city" type="text" placeholder="City" />
-	                                                                            </div>
-	                                                                        </div>
-	                                                                        <div class="col-sm-6">
-	                                                                            <div class="form-group">
-	                                                                                <input class="form-control" type="text" placeholder="State" />
-	                                                                            </div>
-	                                                                        </div>
-	                                                                        <div class="col-sm-6">
-	                                                                            <div>
-	                                                                                <input class="form-control" type="text" placeholder="Country" />
-	                                                                            </div>
-	                                                                        </div>
-	                                                                        <div class="col-sm-6">
-	                                                                            <div>
-	                                                                                <input class="form-control" type="text" placeholder="Pin Code" />
-	                                                                            </div>
-	                                                                        </div>
-	                                                                    </div>
-	                                                                </div>
-	                                                            </div>
-	                                                            <a class="ps-0 edit-information f-w-600" href="javascript:void(0)">Edit more information</a>
-	                                                            <button class="btn btn-secondary update-contact" type="button">Save</button>
-	                                                            <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
-	                                                        </form>
-	                                                    </div>
+	                                                    
 	                                                </div>
 	                                            </div>
 	                                        </div>
@@ -368,57 +182,7 @@
 									
 	                               
 	                               
-	                                <div id="right-history">
-	                                    <div class="modal-header p-l-20 p-r-20">
-	                                        <h6 class="modal-title w-100">
-	                                            Contact History
-	                                            <span class="pull-right">
-	                                                <a class="closehistory" href="javascript:void(0)"><i class="icofont icofont-close"></i></a>
-	                                            </span>
-	                                        </h6>
-	                                    </div>
-	                                    <div class="history-details">
-	                                        <div class="text-center">
-	                                            <i class="icofont icofont-ui-edit"></i>
-	                                            <p>Contact has not been modified yet.</p>
-	                                        </div>
-	                                        <div class="media">
-	                                            <i class="icofont icofont-star me-3"></i>
-	                                            <div class="media-body mt-0">
-	                                                <h6 class="mt-0">Contact Created</h6>
-	                                                <p class="mb-0">Contact is created via mail</p>
-	                                                <span class="f-12">Sep 10, 2019 4:00</span>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <div class="modal fade modal-bookmark" id="printModal" tabindex="-1" role="dialog" aria-hidden="true">
-	                                    <div class="modal-dialog modal-dialog-centered" role="document">
-	                                        <div class="modal-content">
-	                                            <div class="modal-header">
-	                                                <h5 class="modal-title">Print preview</h5>
-	                                                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-	                                            </div>
-	                                            <div class="modal-body list-persons">
-	                                                <div class="profile-mail pt-0" id="DivIdToPrint">
-	                                                    <div class="media">
-	                                                        <img class="img-100 img-fluid m-r-20 rounded-circle" id="updateimg" src="{{asset('assets/images/user/2.png')}}" alt="" />
-	                                                        <div class="media-body mt-0">
-	                                                            <h5><span id="printname">Bucky </span><span id="printlast">Barnes</span></h5>
-	                                                            <p id="printmail">barnes@gmail.com</p>
-	                                                        </div>
-	                                                    </div>
-	                                                    <div class="email-general">
-	                                                        <h6>General</h6>
-	                                                        <p>Email Address: <span class="font-primary" id="mailadd">barnes@gmail.com </span></p>
-	                                                    </div>
-	                                                </div>
-	                                                <button class="btn btn-secondary" id="btnPrint" type="button" onclick="printDiv();">Print</button>
-	                                                <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
+	                                
 									@endforeach
 	                            </div>
 	                        </div>
